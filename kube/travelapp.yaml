@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: travelapp
+spec:
+  selector:
+    app: travelapp
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: travelapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: travelapp
+  template:
+    metadata:
+      labels:
+        app: travelapp
+    spec:
+      containers:
+        - name: app
+          image: arefehhtmi/travelapp:1.0.0
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASEURL
+              value: mongodb://mongo:27017/dev
+          imagePullPolicy: Always
