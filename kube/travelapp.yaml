@@ -32,4 +32,8 @@ spec:
           env:
             - name: DATABASEURL
               value: mongodb://mongo:27017/dev
+            - name: GEOCODER_PROVIDER
+              value: GEOCODER_PROVIDER
+            - name: GEOCODER_API_KEY
+              value: GEOCODER_API_KEY
           imagePullPolicy: Always
